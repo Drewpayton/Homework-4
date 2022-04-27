@@ -6,11 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Password Generator</title>
     <link rel="stylesheet" href="style.css" />
+    <script defer src="java.js"></script>
   </head>
   <body>
     <div class="wrapper">
       <header>
-        <button>High Scores</button>
+        <button class="highscore-btn">High Scores</button>
         <div class="timer">60</div>
         <div>Time:</div>
         
@@ -19,7 +20,17 @@
         <div class="card-header">
           <h2>Code Quiz Challenge</h2>
         </div>
-        <div class="card-body">
+        <div>
+            <h2 class="question-asked hide">Question</h2>
+        </div>
+        <div class="answer-container">
+            
+        </div>
+        <div class="question-container card-body hide">
+    
+        </div>
+        <div class="card-text card-body">
+
             <p>This will be a timed test to test your knowledge about coding. You will
                 have a time limit and if you get a question wrong then you will time will
                 go down my ten seconds.
@@ -30,7 +41,7 @@
         </div>
       </div>
     </div>
-    <script src="java.js"></script>
+    
   </body>
 </html>
 
