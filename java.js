@@ -10,6 +10,7 @@ var buttonThreeElement = document.querySelector(".btn-3");
 var buttonFourElement = document.querySelector(".btn-4");
 var answerBtn = document.querySelector(".btn-2");
 var answerEl = document.querySelector(".answer-container");
+var highScoreBtn = document.querySelector(".highscore-btn")
 var shuffledQuestions, currentQuetionsIndex;
 var timerCount;
 var score = 0
@@ -79,22 +80,7 @@ function startGame() {
     setTime();
     setUpQuestions();
     showQuestion(shuffledQuestions[currentQuetionsIndex]) 
-}
-
-function setNextQuestion(){
-    updateAnswer();
-    showQuestion(shuffledQuestions[currentQuetionsIndex])
-    
-}
-
-function updateAnswer(){
-    // answerEl = document.querySelectorAll(".answer-container");
-    
-    while (answerEl.firstChild) {
-        answerBtn.remove(answerEl.firstChild)
-    }
-
-    console.log(answerEl.length + " this is test")
+    highScoreBtn.disabled = true
 }
 
 function showQuestion(question) {
@@ -108,9 +94,27 @@ function showQuestion(question) {
         }
         button.addEventListener("click", selectAnswer)
         answerEl.appendChild(button)
-
+    
     })  
 }
+
+function setNextQuestion(){
+    updateAnswer();
+    showQuestion(shuffledQuestions[currentQuetionsIndex])
+    
+}
+
+function updateAnswer(){
+    
+    let answerList = answerEl.children;
+
+    while(answerList.length > 0) {
+        answerEl.removeChild(answerList[answerList.length-1]);
+        answerList = answerEl.children;
+    }
+}
+
+
 
     function selectAnswer(e) {
         var selectedButton = e.target
@@ -123,7 +127,7 @@ function showQuestion(question) {
     }
 
     function setStatusClass(element, correct) {
-        console.log(element)
+        
         if (correct) {
             score = score + 5;
             console.log(score)
@@ -132,8 +136,27 @@ function showQuestion(question) {
             timerCount = timerCount - 10
         }
         currentQuetionsIndex++;
+        if (currentQuetionsIndex > 4) {
+            endGame();
+            return;
+            
+        }else{
         setNextQuestion();
+        }
     }
+
+function endGame() {
+    questionAsked.remove();
+    answerEl.remove();
+    
+
+
+    console.log("this is the end")
+}
+
+// function highscore() {
+    
+// }
 
 
 
@@ -145,6 +168,10 @@ function setTime() {
   
       if(timerCount === 0) {
         clearInterval(timerInterval);
+        endGame();
+        
       }
     }, 1000);
 }
+
+// highScoreBtn.addEventListener("click",)
