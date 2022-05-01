@@ -12,8 +12,9 @@
     <div class="wrapper">
       <header>
         <button class="highscore-btn">High Scores</button>
+
         <div class="timer">60</div>
-        <div>Time:</div>
+        <div class="time-text">Time:</div>
         
       </header>
       <div class="card">
@@ -23,8 +24,15 @@
         <div>
             <h2 class="question-asked hide">Question</h2>
         </div>
-        <div class="answer-container">
-            
+        <div class="answer-container"></div>
+        <div class="endgame-container">
+          <label for="fname"></label>
+          <input class="hide" type="text" id="highscore-name" name="fname" maxlength="3">
+          <button class="reset-game highscore-btn hide" id="enter-btn">Enter</button>
+          <button class="reset-game highscore-btn hide" id="reset-game">Return to Start</button>
+        </div>
+        <div>
+          <ol id="highscore-list"></ol>
         </div>
         <div class="question-container card-body hide">
     

@@ -1,4 +1,5 @@
 var timerElement = document.querySelector(".timer");
+var timerTextElement = document.querySelector(".timer-text");
 var startButton = document.getElementById("start-quiz");
 var questionElement = document.querySelector(".question-container");
 var cardBodyElement = document.querySelector(".card-text");
@@ -10,9 +11,15 @@ var buttonThreeElement = document.querySelector(".btn-3");
 var buttonFourElement = document.querySelector(".btn-4");
 var answerBtn = document.querySelector(".btn-2");
 var answerEl = document.querySelector(".answer-container");
+var endGameContainer = document.querySelector(".endGame-container");
 var highScoreBtn = document.querySelector(".highscore-btn")
+var highscoreEl = document.getElementById("highscore-name");
+var resetGameEl = document.getElementById("reset-game");
+var enterBtnEl = document.getElementById("enter-btn");
+var valueArray = []
 var shuffledQuestions, currentQuetionsIndex;
 var timerCount;
+var highscore = 0
 var score = 0
 
 var questions = [
@@ -72,6 +79,7 @@ questionAsked.classList.remove('hide');
 }
 
 startButton.addEventListener("click", startGame)
+// highScoreBtn.addEventListener("click", highScore)
 
 function startGame() {
     timerCount = 60;
@@ -148,16 +156,34 @@ function updateAnswer(){
 function endGame() {
     questionAsked.remove();
     answerEl.remove();
-    
-
-
-    console.log("this is the end")
+    addEndGameButton()
+    highScoreBtn.disabled = false;
 }
 
-// function highscore() {
-    
-// }
+function addEndGameButton() {
+    var highscoreEl = document.getElementById("highscore-name");
+    highscoreEl.classList.remove("hide");
 
+        var resetGameEl = document.getElementById("reset-game");
+        resetGameEl.classList.remove("hide");
+        
+        var enterBtnEl = document.getElementById("enter-btn");
+        enterBtnEl.classList.remove("hide");
+}
+
+function getValue() {
+    var value = document.getElementById("highscore-name").value
+    valueArray.push(value)
+    document.getElementById("highscore-list").innerHTML = valueArray + " Score: " + score
+    enterBtnEl.disabled = true
+}
+
+function donePage() {
+    highscoreEl.classList.add('hide')
+    highscoreEl.classList.add('hide')
+    enterBtnEl.classList.add('hide')
+    resetGameEl.classList.add('centering')
+}
 
 
 function setTime() {
@@ -166,7 +192,7 @@ function setTime() {
       timerElement.textContent = timerCount;
       startButton.disabled = true
   
-      if(timerCount === 0) {
+      if(timerCount === 0 || currentQuetionsIndex > 4) {
         clearInterval(timerInterval);
         endGame();
         
@@ -174,4 +200,10 @@ function setTime() {
     }, 1000);
 }
 
-// highScoreBtn.addEventListener("click",)
+function resetGameState() {
+    window.location.reload()
+}
+
+resetGameEl.addEventListener("click", resetGameState)
+enterBtnEl.addEventListener("click", getValue)
+enterBtnEl.addEventListener("click", donePage)
