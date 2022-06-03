@@ -72,14 +72,13 @@ var questions = [
 
 function setUpQuestions() {
     startButton.classList.add('hide');
-cardBodyElement.classList.add('hide');
-questionElement.classList.remove('hide');
-cardHeaderElement.classList.add('hide');
-questionAsked.classList.remove('hide');
+    cardBodyElement.classList.add('hide');
+    questionElement.classList.remove('hide');
+    cardHeaderElement.classList.add('hide');
+    questionAsked.classList.remove('hide');
 }
 
 startButton.addEventListener("click", startGame)
-// highScoreBtn.addEventListener("click", highScore)
 
 function startGame() {
     timerCount = 60;
@@ -127,10 +126,10 @@ function updateAnswer(){
     function selectAnswer(e) {
         var selectedButton = e.target
         var correct = selectedButton.dataset.correct
+
         setStatusClass(document.body, correct)
         Array.from(answerBtn.children).forEach(button => {
             setStatusClass(button, button.dataset.correct)
-
         })
     }
 
@@ -139,7 +138,6 @@ function updateAnswer(){
         if (correct) {
             score = score + 5;
             console.log(score)
-
         }else {
             timerCount = timerCount - 10
         }
@@ -147,7 +145,6 @@ function updateAnswer(){
         if (currentQuetionsIndex > 4) {
             endGame();
             return;
-            
         }else{
         setNextQuestion();
         }
@@ -158,27 +155,41 @@ function endGame() {
     answerEl.remove();
     addEndGameButton()
     highScoreBtn.disabled = false;
+
 }
 
 function addEndGameButton() {
     var highscoreEl = document.getElementById("highscore-name");
-    highscoreEl.classList.remove("hide");
+    var resetGameEl = document.getElementById("reset-game");
+    var enterBtnEl = document.getElementById("enter-btn");
 
-        var resetGameEl = document.getElementById("reset-game");
-        resetGameEl.classList.remove("hide");
+    highscoreEl.classList.remove("hide");
+    resetGameEl.classList.remove("hide");
+    enterBtnEl.classList.remove("hide");
+
         
-        var enterBtnEl = document.getElementById("enter-btn");
-        enterBtnEl.classList.remove("hide");
 }
 
 function getValue() {
     var value = document.getElementById("highscore-name").value
     valueArray.push(value)
     document.getElementById("highscore-list").innerHTML = valueArray + " Score: " + score
-    enterBtnEl.disabled = true
 }
 
+const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+const maxHighScores = 5;
+
 function donePage() {
+    
+    const scoreVal = {
+        score: score,
+        name: highscoreEl.value
+    }
+    highScores.push(scoreVal)
+    console.log(highScores)
+    highScores.sort( (a,b) =>  b.score - a.score)
+    highScores.splice(5);
+    localStorage.setItem('highScores', JSON.stringify(highScores))
     highscoreEl.classList.add('hide')
     highscoreEl.classList.add('hide')
     enterBtnEl.classList.add('hide')

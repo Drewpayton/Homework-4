@@ -1,0 +1,33 @@
+body {
+    font-family: sans-serif;
+    background-color: #FAF9F6;
+  }
+
+  h1 {
+      font-size: 60px !important;
+  }
+
+.center-text {
+    text-align: center;
+    display: block;
+    font-size: 50px;
+}
+
+.highscore-btn {
+    --hue: var(var(--hue-neutral));
+    padding: 7px;
+    font-size: large;
+    background-color: royalblue;
+    color: white;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 2px;
+    border: 1px solid grey;
+    display: flex;
+    margin: auto;
+    
+}
+
+.highscore-btn:hover {
+    border: solid 2px black;
+}
+

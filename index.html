@@ -6,24 +6,27 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Password Generator</title>
     <link rel="stylesheet" href="style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script defer src="java.js"></script>
   </head>
   <body>
     <div class="wrapper">
       <header>
-        <button class="highscore-btn">High Scores</button>
-
+        <a href="highscores.html"><button class="highscore-btn">High Scores</button></a>
         <div class="timer">60</div>
         <div class="time-text">Time:</div>
-        
       </header>
+
       <div class="card">
+
         <div class="card-header">
           <h2>Code Quiz Challenge</h2>
         </div>
+
         <div>
             <h2 class="question-asked hide">Question</h2>
         </div>
+
         <div class="answer-container"></div>
         <div class="endgame-container">
           <label for="fname"></label>
@@ -31,12 +34,12 @@
           <button class="reset-game highscore-btn hide" id="enter-btn">Enter</button>
           <button class="reset-game highscore-btn hide" id="reset-game">Return to Start</button>
         </div>
+
         <div>
           <ol id="highscore-list"></ol>
         </div>
-        <div class="question-container card-body hide">
-    
-        </div>
+
+        <div class="question-container card-body hide"></div>
         <div class="card-text card-body">
 
             <p>This will be a timed test to test your knowledge about coding. You will
@@ -44,6 +47,7 @@
                 go down my ten seconds.
             </p>
         </div>
+
         <div class="card-footer">
           <button id="start-quiz" class="btn">Start Quiz</button>
         </div>
